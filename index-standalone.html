@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>СИСТЕМА СПЕЦДОСТУПА</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+    
+    :root {
+      --terminal-green: #39FF14;
+      --terminal-black: #121212;
+      --terminal-darkGreen: #2db70f;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: var(--terminal-black);
+      color: var(--terminal-green);
+      font-family: 'IBM Plex Mono', monospace;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* CRT эффекты */
+    .crt-effect {
+      animation: textShadow 1.6s infinite;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    @keyframes textShadow {
+      0% {
+        text-shadow: 0.4389924193300864px 0 1px rgba(0, 30, 255, 0.5), -0.4389924193300864px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      5% {
+        text-shadow: 2.7928974010788217px 0 1px rgba(0, 30, 255, 0.5), -2.7928974010788217px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      10% {
+        text-shadow: 0.02956275843481219px 0 1px rgba(0, 30, 255, 0.5), -0.02956275843481219px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      15% {
+        text-shadow: 0.40218538552878136px 0 1px rgba(0, 30, 255, 0.5), -0.40218538552878136px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      20% {
+        text-shadow: 3.4794037899852017px 0 1px rgba(0, 30, 255, 0.5), -3.4794037899852017px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      25% {
+        text-shadow: 1.6125630401149584px 0 1px rgba(0, 30, 255, 0.5), -1.6125630401149584px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      30% {
+        text-shadow: 0.7015590085143956px 0 1px rgba(0, 30, 255, 0.5), -0.7015590085143956px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      35% {
+        text-shadow: 3.896914047650351px 0 1px rgba(0, 30, 255, 0.5), -3.896914047650351px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      40% {
+        text-shadow: 3.870905614848819px 0 1px rgba(0, 30, 255, 0.5), -3.870905614848819px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      45% {
+        text-shadow: 2.231056963361899px 0 1px rgba(0, 30, 255, 0.5), -2.231056963361899px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      50% {
+        text-shadow: 0.08084290417898504px 0 1px rgba(0, 30, 255, 0.5), -0.08084290417898504px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      55% {
+        text-shadow: 2.3758461067427543px 0 1px rgba(0, 30, 255, 0.5), -2.3758461067427543px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      60% {
+        text-shadow: 2.202193051050636px 0 1px rgba(0, 30, 255, 0.5), -2.202193051050636px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      65% {
+        text-shadow: 2.8638780614874975px 0 1px rgba(0, 30, 255, 0.5), -2.8638780614874975px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      70% {
+        text-shadow: 0.48874025155497314px 0 1px rgba(0, 30, 255, 0.5), -0.48874025155497314px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      75% {
+        text-shadow: 1.8948491305757957px 0 1px rgba(0, 30, 255, 0.5), -1.8948491305757957px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      80% {
+        text-shadow: 0.0833037308038857px 0 1px rgba(0, 30, 255, 0.5), -0.0833037308038857px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      85% {
+        text-shadow: 0.09769827255241735px 0 1px rgba(0, 30, 255, 0.5), -0.09769827255241735px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      90% {
+        text-shadow: 3.443339761481782px 0 1px rgba(0, 30, 255, 0.5), -3.443339761481782px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      95% {
+        text-shadow: 2.1841838852799786px 0 1px rgba(0, 30, 255, 0.5), -2.1841838852799786px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+      100% {
+        text-shadow: 2.6208764473832513px 0 1px rgba(0, 30, 255, 0.5), -2.6208764473832513px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+      }
+    }
+    
+    .scan-line-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .scan-line {
+      position: absolute;
+      width: 100%;
+      height: 8px;
+      background: rgba(57, 255, 20, 0.1);
+      z-index: 10;
+      mix-blend-mode: overlay;
+      animation: scanLine 8s linear infinite;
+    }
+    
+    @keyframes scanLine {
+      0% {
+        top: -5%;
+      }
+      100% {
+        top: 100%;
+      }
+    }
+    
+    /* Терминал и формы */
+    .terminal-window {
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 4rem);
+    }
+    
+    .terminal-output {
+      white-space: pre-line;
+      margin-bottom: 1rem;
+    }
+    
+    .terminal-status {
+      margin-top: auto;
+      padding-top: 1rem;
+      font-size: 0.75rem;
+      opacity: 0.7;
+      border-top: 1px solid var(--terminal-green);
+    }
+    
+    .terminal-input {
+      background-color: transparent;
+      color: var(--terminal-green);
+      caret-color: var(--terminal-green);
+      outline: none;
+      border: none;
+      border-bottom: 1px solid var(--terminal-green);
+      font-family: 'IBM Plex Mono', monospace;
+      width: 100%;
+      padding: 0.25rem 0.5rem;
+    }
+    
+    .terminal-prompt {
+      display: flex;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+    
+    .terminal-prompt::before {
+      content: "> ";
+      color: var(--terminal-green);
+    }
+    
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1.2em;
+      background-color: var(--terminal-green);
+      animation: blink 1s infinite;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+    
+    @keyframes blink {
+      0%, 49% {
+        opacity: 1;
+      }
+      50%, 100% {
+        opacity: 0;
+      }
+    }
+    
+    /* Секретная страница */
+    .secret-page {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+      padding: 2rem;
+    }
+    
+    .secret-header {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .secret-info {
+      border-top: 1px solid var(--terminal-green);
+      border-bottom: 1px solid var(--terminal-green);
+      padding: 1rem 0;
+      margin-bottom: 1.5rem;
+    }
+    
+    .secret-info p {
+      margin-bottom: 0.5rem;
+    }
+    
+    .secret-image-container {
+      border: 1px solid var(--terminal-green);
+      padding: 0.5rem;
+      background-color: #000;
+      margin: 1.5rem 0;
+      width: 100%;
+      max-width: 400px;
+      align-self: center;
+    }
+    
+    .secret-image {
+      width: 100%;
+      height: auto;
+      filter: brightness(110%);
+    }
+    
+    .secret-description {
+      font-size: 0.875rem;
+      opacity: 0.7;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .back-button {
+      margin-top: 2rem;
+      background: none;
+      border: 1px solid var(--terminal-green);
+      color: var(--terminal-green);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace;
+      transition: all 0.3s;
+    }
+    
+    .back-button:hover {
+      background-color: var(--terminal-darkGreen);
+      color: #000;
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Главная страница (терминал) -->
+  <div id="terminal-page" class="crt-effect">
+    <div class="scan-line-container">
+      <div class="scan-line"></div>
+    </div>
+    
+    <div class="terminal-window">
+      <div class="terminal-output" id="terminal-output"></div>
+      
+      <div id="terminal-form-container" style="display: none;">
+        <form id="terminal-form" class="terminal-prompt">
+          <input 
+            type="text" 
+            id="terminal-input" 
+            class="terminal-input" 
+            autocomplete="off" 
+            autofocus
+          >
+        </form>
+      </div>
+      
+      <div class="terminal-status">
+        [СИСТЕМА АКТИВНА] - ДЛЯ ЗАВЕРШЕНИЯ СЕАНСА ВВЕДИТЕ /EXIT
+      </div>
+    </div>
+  </div>
+  
+  <!-- Секретная страница -->
+  <div id="secret-page" class="crt-effect secret-page">
+    <div class="scan-line-container">
+      <div class="scan-line"></div>
+    </div>
+    
+    <h1 class="secret-header">ФАЙЛ: ЭНДЕРМЕН</h1>
+    
+    <div id="loading-text"></div>
+    
+    <div id="secret-content" style="display: none;">
+      <div class="secret-info">
+        <p>КЛАССИФИКАЦИЯ: СТРОГО СЕКРЕТНО</p>
+        <p>ДАТА ДОБАВЛЕНИЯ: 12.06.2011</p>
+        <p>СТАТУС: АКТИВЕН</p>
+      </div>
+      
+      <div class="secret-image-container fade-in">
+        <img 
+          src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/b/bd/Enderman_JE4.png" 
+          alt="Эндермен" 
+          class="secret-image"
+        >
+      </div>
+      
+      <div class="secret-description">
+        Существо, обнаруженное исследователями НПКА в измерении "Край". Обладает способностью телепортации и проявляет агрессию при прямом зрительном контакте.
+      </div>
+      
+      <button class="back-button" id="back-button">
+        ВЕРНУТЬСЯ К ТЕРМИНАЛУ
+      </button>
+    </div>
+  </div>
+  
+  <script>
+    // Общие переменные и функции
+    const terminalPage = document.getElementById('terminal-page');
+    const secretPage = document.getElementById('secret-page');
+    const terminalOutput = document.getElementById('terminal-output');
+    const terminalInput = document.getElementById('terminal-input');
+    const terminalFormContainer = document.getElementById('terminal-form-container');
+    const terminalForm = document.getElementById('terminal-form');
+    const loadingText = document.getElementById('loading-text');
+    const secretContent = document.getElementById('secret-content');
+    const backButton = document.getElementById('back-button');
+    
+    // Функция для эффекта печатающегося текста
+    function typeText(element, text, speed = 30, callback = null) {
+      let i = 0;
+      const interval = setInterval(() => {
+        element.innerHTML += text.charAt(i);
+        i++;
+        if (i > text.length - 1) {
+          clearInterval(interval);
+          if (callback) callback();
+        }
+      }, speed);
+    }
+    
+    // Функция форматирования даты и времени
+    function getCurrentDateTime() {
+      const now = new Date();
+      const date = now.toLocaleDateString('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+      const time = now.toLocaleTimeString('ru-RU', {
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      
+      return { date, time };
+    }
+    
+    // Главная страница - терминал
+    function initTerminal() {
+      const { date, time } = getCurrentDateTime();
+      const greetingText = `СИСТЕМА СПЕЦДОСТУПА ИОН-КТП19 (c) 1986-1995
+ВЕРСИЯ ПО: 4.3.1
+ИНИЦИАЛИЗАЦИЯ СИСТЕМЫ...
+УСПЕШНО
+ДАТА: ${date} ВРЕМЯ: ${time}
+
+ДОБРО ПОЖАЛОВАТЬ, ОПЕРАТОР
+`;
+      
+      // Очищаем терминал
+      terminalOutput.innerHTML = '';
+      
+      // Печатаем приветствие
+      typeText(terminalOutput, greetingText, 30, () => {
+        setTimeout(() => {
+          // Печатаем приглашение для ввода
+          const promptDiv = document.createElement('div');
+          promptDiv.className = 'mt-4';
+          terminalOutput.appendChild(promptDiv);
+          
+          typeText(promptDiv, "ВВЕДИТЕ НАЗВАНИЕ ФАЙЛА ДЛЯ ДОСТУПА:", 50, () => {
+            setTimeout(() => {
+              // Показываем форму для ввода
+              terminalFormContainer.style.display = 'block';
+              terminalInput.focus();
+            }, 500);
+          });
+        }, 500);
+      });
+      
+      // Обработка отправки формы
+      terminalForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const input = terminalInput.value.trim().toLowerCase();
+        
+        if (input === 'эндермен') {
+          // Правильный пароль
+          terminalPage.style.display = 'none';
+          secretPage.style.display = 'flex';
+          document.title = "ФАЙЛ: ЭНДЕРМЕН - ДОСТУП РАЗРЕШЕН";
+          
+          // Инициализация секретной страницы
+          initSecretPage();
+        } else {
+          // Неправильный пароль
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'mt-2';
+          errorDiv.style.color = '#ff4d4d';
+          errorDiv.textContent = 'ОШИБКА: ФАЙЛ НЕ НАЙДЕН. ПОПРОБУЙТЕ СНОВА.';
+          terminalOutput.appendChild(errorDiv);
+          terminalInput.value = '';
+        }
+      });
+    }
+    
+    // Секретная страница
+    function initSecretPage() {
+      // Анимация загрузки
+      const loadingString = "ЗАГРУЗКА ЗАСЕКРЕЧЕННОГО ФАЙЛА...\nЗагрузка: ██████████ 100%\nДОСТУП РАЗРЕШЕН.";
+      loadingText.innerHTML = '';
+      
+      typeText(loadingText, loadingString, 40, () => {
+        setTimeout(() => {
+          // Показываем содержимое секретной страницы
+          secretContent.style.display = 'block';
+        }, 500);
+      });
+      
+      // Кнопка возврата
+      backButton.addEventListener('click', function() {
+        secretPage.style.display = 'none';
+        terminalPage.style.display = 'block';
+        document.title = "СИСТЕМА СПЕЦДОСТУПА";
+        terminalInput.value = '';
+        terminalInput.focus();
+      });
+    }
+    
+    // Запускаем терминал при загрузке страницы
+    window.addEventListener('DOMContentLoaded', initTerminal);
+  </script>
+</body>
+</html>
